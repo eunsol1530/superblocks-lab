@@ -35,7 +35,7 @@ export default class SuperProvider {
         if (this.iframe.contentWindow) {
             this.iframe.contentWindow.postMessage(
                 { type: 'init', channel: this.channelId },
-                '*'
+                'https://trusted-origin.com' // Replace '*' with the specific trusted origin
             );
         }
         setTimeout(this._initIframe, 1000);
@@ -82,7 +82,7 @@ export default class SuperProvider {
                         id: data.id,
                         payload: { err: err, res: res },
                     },
-                    '*'
+                    'https://trusted-origin.com' // Replace '*' with the specific trusted origin
                 );
             } catch (e) {}
         };

@@ -29,6 +29,10 @@ export const previewService = {
 
     init(wallet) {
         window.addEventListener('message', async (e) => {
+            const expectedOrigin = 'https://trusted-origin.com'; // Replace with the actual expected origin
+            if (e.origin !== expectedOrigin) {
+                return; // Ignore messages from unexpected origins
+            }
             if (e.data.type === 'window-ready' && this.projectItem) {
                 const builtProject = await buildProjectHtml(this.projectItem, wallet, this.disableAccounts, environment);
                 exportableDappHtml = builtProject.exportableContent;

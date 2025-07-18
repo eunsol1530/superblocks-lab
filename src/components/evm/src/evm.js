@@ -848,8 +848,10 @@ function init(callback, debug = true) {
 
     // Preallocate account used for call()
     // TODO: move to general purpose addAccount
-    var key =
-        '79e8817a0b150357a5c30964e2d8b551da038a84d855687222b3bc581730df6e';
+    var key = process.env.PRIVATE_KEY; // Use environment variable instead of hardcoded key
+    if (!key) {
+        throw new Error('Private key not set in environment variables');
+    }
     var address = '0x620cbab1f950e38a964d02ddcf85ecfcbb9f468f';
     var accountData = {
         secretKey: key,
