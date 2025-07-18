@@ -35,7 +35,7 @@ export default class SuperProvider {
         if (this.iframe.contentWindow) {
             this.iframe.contentWindow.postMessage(
                 { type: 'init', channel: this.channelId },
-                '*'
+                'https://trusted-origin.com' // 신뢰할 수 있는 출처로 변경
             );
         }
         setTimeout(this._initIframe, 1000);
@@ -82,7 +82,7 @@ export default class SuperProvider {
                         id: data.id,
                         payload: { err: err, res: res },
                     },
-                    '*'
+                    'https://trusted-origin.com' // 신뢰할 수 있는 출처로 변경
                 );
             } catch (e) {}
         };

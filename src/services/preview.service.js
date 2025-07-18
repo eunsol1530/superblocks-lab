@@ -33,7 +33,7 @@ export const previewService = {
                 const builtProject = await buildProjectHtml(this.projectItem, wallet, this.disableAccounts, environment);
                 exportableDappHtml = builtProject.exportableContent;
                 if (e.source) {
-                    e.source.postMessage({ type: 'set-content', payload: builtProject.content }, '*');
+                    e.source.postMessage({ type: 'set-content', payload: builtProject.content }, 'https://trusted-origin.com');
                     this.superProvider.initIframe(document.getElementById(iframeId));
                 }
             }
