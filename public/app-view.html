@@ -20,18 +20,22 @@
             var iframe = document.getElementById('iframe');
             
             window.addEventListener('message', function(e) {
+                const trustedOrigin = 'https://trusted-origin.com'; // Replace with the actual trusted origin
+                if (e.origin !== trustedOrigin) {
+                    return; // Ignore messages from untrusted origins
+                }
                 if (e.data.type === 'set-content') {
                     iframe.srcdoc = e.data.payload;
                 } else {
                     if (e.source === iframe.contentWindow) {
-                        window.parent.postMessage(e.data, '*');
+                        window.parent.postMessage(e.data, trustedOrigin);
                     } else if (e.source === window.parent) {
-                        iframe.contentWindow.postMessage(e.data, '*');
+                        iframe.contentWindow.postMessage(e.data, trustedOrigin);
                     }
                 }
             }, false);
 
-            window.parent.postMessage({ type: 'window-ready' }, '*');
+            window.parent.postMessage({ type: 'window-ready' }, 'https://trusted-origin.com'); // Use the actual trusted origin
         };
     </script>
 </head>
