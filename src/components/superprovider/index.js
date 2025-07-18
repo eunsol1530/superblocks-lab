@@ -35,7 +35,7 @@ export default class SuperProvider {
         if (this.iframe.contentWindow) {
             this.iframe.contentWindow.postMessage(
                 { type: 'init', channel: this.channelId },
-                '*'
+                this.iframe.src // Specify the origin of the iframe
             );
         }
         setTimeout(this._initIframe, 1000);
@@ -82,7 +82,7 @@ export default class SuperProvider {
                         id: data.id,
                         payload: { err: err, res: res },
                     },
-                    '*'
+                    this.iframe.src // Specify the origin of the iframe
                 );
             } catch (e) {}
         };
